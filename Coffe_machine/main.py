@@ -85,13 +85,20 @@ b. The prompt should show every time action has completed, e.g once the drink
 is dispensed. The prompt should show again to serve the next customer.
 """
 profit = 0
-
 is_on = True
+
+"""function: is_resource_sufficient"""
+def is_resource_sufficient(list_of_ingredients):
+    for item in list_of_ingredients:
+        if list_of_ingredients[item] >= resources[item]:
+            print(f"Sorry there is not enough {item}.")
+            return False
+    return True
 
 while is_on:
     choice = input("What would you like? (espresso/latte/cappuccino): ")
     if choice == "off":
-        
+
         is_on = False
     elif choice == "report":
         print(f"Water: {resources['water']}ml")
@@ -99,8 +106,9 @@ while is_on:
         print(f"Coffee: {resources['coffee']}g")
         print(f"Money: ${profit}")
     else:
+        """we access a keyname using square bracket"""
         drink = MENU[choice]
-        print(drink)
+        is_resource_sufficient(drink["ingredients"])
 
 # TODO:
 
